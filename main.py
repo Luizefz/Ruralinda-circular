@@ -1,7 +1,7 @@
 from fastapi import FastAPI
+from fastapi.responses import RedirectResponse
 from pydantic import BaseModel
 from datetime import datetime
-
 
 app = FastAPI()
 
@@ -31,8 +31,9 @@ def add_bus_message(body: BusMessage):
     return {"message": "Message added successfully"}
 
 @app.get("/")
-def root():
-    return {"message": "All systems are operational"}
+def read_root():
+    return RedirectResponse(url="/docs")
+
 
 @app.get("/bus-location")
 def get_bus_location():
@@ -40,7 +41,7 @@ def get_bus_location():
         return {"message": "The bus hasn't sent any location yet"}
     return last_locations
 
-@app.get("/last-message")
+@app.get("/last-messages")
 def get_last_message():
     if len(last_messages) == 0:
         return {"message": "No messages sent yet"}
