@@ -1,6 +1,5 @@
 import requests
 import json
-from webhook import BusMessage
 from uuid import uuid4
 from datetime import datetime
 
